@@ -98,6 +98,8 @@ def create_closest_team_cache():
     print("loading team stadium locations")
     team_df = load_stadium_data('stadiums.json')
     print("loading team colors")
+    # colors from here: https://teamcolorcodes.com/nfl-team-color-codes/
+    # replace some teams' primary color with secondary to make map look good
     team_color_df = load_team_colors('team_colors.dat')
     print("creating team dataframe")
     team_df = pd.merge(team_df, team_color_df, how='inner', left_index=True, right_index=True)
@@ -146,8 +148,8 @@ def show_nfl_map():
         colorscale=colorscale,
         show_state_data=True,
         show_hover=True, centroid_marker={'opacity': 0},
-        asp=2.9, title='USA by Unemployment %',
-        legend_title='% unemployed'
+        asp=2.9, title='The Closest NFL Team For Every County',
+        legend_title='Team Colors'
     )
 
     fig.layout.template = None
@@ -157,7 +159,7 @@ def show_nfl_map():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # create_closest_team_cache()
+    create_closest_team_cache()
 
     show_nfl_map()
 

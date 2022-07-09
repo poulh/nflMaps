@@ -46,7 +46,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 34,25,Monmouth,New Jersey,"40 17m 15.0625s N, 74 9m 29.5286s W",643163,34,025,34025,New York Giants,36.56732224792731,23
 40,41,Delaware,Oklahoma,"36 24m 29.5679s N, 94 48m 9.56705s W",40400,40,041,40041,Kansas City Chiefs,182.95384803439853,16
 20,11,Bourbon,Kansas,"37 51m 18.8122s N, 94 50m 57.4686s W",14333,20,011,20011,Kansas City Chiefs,84.6850451477046,16
-6,29,Kern,California,"35 20m 34.2505s N, 118 43m 47.6415s W",909997,06,029,06029,Los Angeles Rams,94.98964814493765,18
+6,29,Kern,California,"35 20m 34.2505s N, 118 43m 47.6415s W",909997,06,029,06029,Los Angeles Rams,98.32577520466286,18
 54,7,Braxton,West Virginia,"38 41m 59.5418s N, 80 43m 9.4373s W",12386,54,007,54007,Pittsburgh Steelers,126.22456040009673,27
 37,81,Guilford,North Carolina,"36 4m 46.0982s N, 79 47m 20.0554s W",541347,37,081,37081,Carolia Panthers,83.94680628593628,5
 1,107,Pickens,Alabama,"33 16m 51.1568s N, 88 5m 19.2933s W",19062,01,107,01107,Tennessee Titans,212.55826993301625,31
@@ -645,7 +645,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 13,209,Montgomery,Georgia,"32 10m 24.1112s N, 82 32m 5.34212s W",8577,13,209,13209,Jacksonville Jaguars,138.0415362900778,15
 48,363,Palo Pinto,Texas,"32 45m 11.4494s N, 98 18m 46.877s W",28427,48,363,48363,Dallas Cowboys,71.05783990151069,9
 40,7,Beaver,Oklahoma,"36 44m 58.9475s N, 100 28m 36.6054s W",5012,40,007,40007,Denver Broncos,321.969274746855,10
-6,107,Tulare,California,"36 13m 12.564s N, 118 48m 1.70093s W",473736,06,107,06107,Los Angeles Rams,154.82641887192813,18
+6,107,Tulare,California,"36 13m 12.564s N, 118 48m 1.70093s W",473736,06,107,06107,Los Angeles Rams,158.4290735978932,18
 51,163,Rockbridge,Virginia,"37 48m 52.1606s N, 79 26m 50.2155s W",22610,51,163,51163,Washington Redskins,159.24413266184536,32
 47,103,Lincoln,Tennessee,"35 8m 25.8603s N, 86 35m 20.1899s W",35309,47,103,47103,Tennessee Titans,71.4676021885605,31
 47,37,Davidson,Tennessee,"36 10m 10.3064s N, 86 47m 5.36673s W",715486,47,037,47037,Tennessee Titans,0.7816933248969625,31
@@ -1157,7 +1157,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 13,181,Lincoln,Georgia,"33 47m 37.1747s N, 82 27m 4.3661s W",7704,13,181,13181,Atlanta Falcons,112.24812579657147,2
 31,95,Jefferson,Nebraska,"40 10m 32.7391s N, 97 8m 33.7764s W",7260,31,095,31095,Kansas City Chiefs,161.7682222024838,16
 29,145,Newton,Missouri,"36 54m 19.8318s N, 94 20m 21.2874s W",58613,29,145,29145,Kansas City Chiefs,148.03911118867956,16
-6,37,Los Angeles,California,"34 11m 52.7923s N, 118 15m 39.6499s W",9989165,06,037,06037,Los Angeles Rams,12.773111564738095,18
+6,37,Los Angeles,California,"34 11m 52.7923s N, 118 15m 39.6499s W",9989165,06,037,06037,Los Angeles Rams,17.438365049498394,18
 28,73,Lamar,Mississippi,"31 12m 21.719s N, 89 30m 31.2211s W",64368,28,073,28073,New Orleans Saints,92.95411597147108,22
 30,33,Garfield,Montana,"47 16m 39.4994s N, 106 59m 34.4006s W",1172,30,033,30033,Denver Broncos,529.4128968619722,10
 28,15,Carroll,Mississippi,"33 26m 54.6931s N, 89 55m 12.7117s W",9941,28,015,28015,New Orleans Saints,241.17274271823476,22
@@ -1353,7 +1353,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 1,113,Russell,Alabama,"32 17m 18.1681s N, 85 11m 5.86481s W",59226,01,113,01113,Atlanta Falcons,110.85572002186811,2
 40,13,Bryan,Oklahoma,"33 57m 44.0655s N, 96 15m 35.1435s W",46293,40,013,40013,Dallas Cowboys,96.5715032665166,9
 22,73,Ouachita,Louisiana,"32 28m 41.9273s N, 92 9m 17.5325s W",160003,22,073,22073,New Orleans Saints,213.05264841381307,22
-6,25,Imperial,California,"33 2m 22.5256s N, 115 21m 55.2131s W",179489,06,025,06025,Los Angeles Chargers,176.6779379392393,17
+6,25,Imperial,California,"33 2m 22.5256s N, 115 21m 55.2131s W",179489,06,025,06025,Arizona Cardinals,182.71330784967296,1
 48,279,Lamb,Texas,"34 4m 7.04313s N, 102 21m 6.15775s W",12984,48,279,48279,Dallas Cowboys,317.25943250311116,9
 16,87,Washington,Idaho,"44 27m 8.83718s N, 116 47m 5.2128s W",10544,16,087,16087,Seattle Seahawks,343.8533912963464,29
 27,117,Pipestone,Minnesota,"44 1m 22.7826s N, 96 15m 31.1214s W",9405,27,117,27117,Minnesota Vikings,162.17111827772106,20
@@ -1507,7 +1507,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 31,151,Saline,Nebraska,"40 31m 26.6199s N, 97 8m 27.2713s W",14249,31,151,31151,Kansas City Chiefs,174.2226017029883,16
 47,3,Bedford,Tennessee,"35 30m 49.6724s N, 86 27m 31.9885s W",50302,47,003,47003,Tennessee Titans,48.2919554754458,31
 41,1,Baker,Oregon,"44 42m 33.0274s N, 117 40m 31.3084s W",16689,41,001,41001,Seattle Seahawks,299.38651709408344,29
-6,111,Ventura,California,"34 21m 27.1027s N, 119 7m 33.6979s W",842921,06,111,06111,Los Angeles Rams,53.522008126657795,18
+6,111,Ventura,California,"34 21m 27.1027s N, 119 7m 33.6979s W",842921,06,111,06111,Los Angeles Rams,53.00138966392185,18
 19,25,Calhoun,Iowa,"42 23m 6.66547s N, 94 38m 25.489s W",9886,19,025,19025,Minnesota Vikings,191.6494530286411,20
 42,33,Clearfield,Pennsylvania,"41 0m 0.690677s N, 78 28m 26.8504s W",80394,42,033,42033,Pittsburgh Steelers,89.4929859385292,27
 26,13,Baraga,Michigan,"46 41m 58.954s N, 88 21m 7.84924s W",8128,26,013,26013,Green Bay Packers,152.46807051962446,12
@@ -1619,7 +1619,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 26,151,Sanilac,Michigan,"43 26m 35.9218s N, 82 38m 44.7139s W",40506,26,151,26151,Detroit Lions,78.81672136230874,11
 51,540,Charlottesville,Virginia,"38 2m 14.9693s N, 78 29m 7.79959s W",46423,51,540,51540,Washington Redskins,106.43941739870756,32
 1,13,Butler,Alabama,"31 45m 8.76219s N, 86 40m 49.0412s W",19045,01,013,01013,Atlanta Falcons,191.46368654629973,2
-6,83,Santa Barbara,California,"34 32m 18.0387s N, 120 1m 50.8303s W",448096,06,083,06083,Los Angeles Rams,106.06373061129558,18
+6,83,Santa Barbara,California,"34 32m 18.0387s N, 120 1m 50.8303s W",448096,06,083,06083,Los Angeles Rams,104.88894835220006,18
 48,433,Stonewall,Texas,"33 10m 44.8478s N, 100 15m 11.8998s W",1245,48,433,48433,Dallas Cowboys,185.9876051521119,9
 6,97,Sonoma,California,"38 31m 31.0533s N, 122 55m 21.1608s W",488345,06,097,06097,San Francisco 49ers,93.25427763856771,28
 48,383,Reagan,Texas,"31 21m 58.2917s N, 101 31m 22.8303s W",3376,48,383,48383,Dallas Cowboys,276.81280685409394,9
@@ -1723,7 +1723,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 17,115,Macon,Illinois,"39 51m 36.01s N, 88 57m 41.587s W",103647,17,115,17115,Indianapolis Colts,149.01605637691983,14
 37,159,Rowan,North Carolina,"35 38m 22.1045s N, 80 31m 29.1783s W",147027,37,159,37159,Carolia Panthers,33.99566272543842,5
 54,11,Cabell,West Virginia,"38 25m 13.0688s N, 82 14m 30.18s W",94137,54,011,54011,Cincinnati Bengals,131.36343695990766,7
-6,73,San Diego,California,"33 1m 41.471s N, 116 46m 12.7368s W",3297252,06,073,06073,Los Angeles Chargers,103.6350573636364,17
+6,73,San Diego,California,"33 1m 41.471s N, 116 46m 12.7368s W",3297252,06,073,06073,Los Angeles Rams,110.78349826804208,18
 47,177,Warren,Tennessee,"35 40m 43.2578s N, 85 46m 42.5929s W",41023,47,177,47177,Tennessee Titans,65.04599394791795,31
 36,109,Tompkins,New York,"42 27m 7.26725s N, 76 28m 25.1549s W",105404,36,109,36109,Buffalo Bills,120.00782304076188,4
 17,93,Kendall,Illinois,"41 35m 26.0795s N, 88 25m 43.6381s W",132291,17,093,17093,Chicago Bears,45.98142619893288,6
@@ -1784,7 +1784,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 46,65,Hughes,South Dakota,"44 23m 20.5155s N, 99 59m 45.7814s W",17704,46,065,46065,Minnesota Vikings,334.3112142498817,20
 48,427,Starr,Texas,"26 33m 43.751s N, 98 44m 18.2385s W",65835,48,427,48427,Houston Texans,295.77755372155445,13
 48,301,Loving,Texas,"31 50m 57.0919s N, 103 34m 47.6367s W",67,48,301,48301,Dallas Cowboys,384.6044695216258,9
-6,59,Orange,California,"33 40m 36.8884s N, 117 46m 34.1142s W",3184101,06,059,06059,Los Angeles Chargers,30.75967667722692,17
+6,59,Orange,California,"33 40m 36.8884s N, 117 46m 34.1142s W",3184101,06,059,06059,Los Angeles Rams,37.57599059047594,18
 28,79,Leake,Mississippi,"32 45m 12.6612s N, 89 31m 26.457s W",21247,28,079,28079,New Orleans Saints,195.87871333862222,22
 19,91,Humboldt,Iowa,"42 46m 35.2839s N, 94 12m 25.859s W",9595,19,091,19091,Minnesota Vikings,158.92434750292514,20
 17,45,Edgar,Illinois,"39 40m 42.7094s N, 87 44m 44.0336s W",16755,17,045,17045,Indianapolis Colts,84.45918936083494,14
@@ -2210,7 +2210,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 20,13,Brown,Kansas,"39 49m 35.3961s N, 95 33m 51.1908s W",9473,20,013,20013,Kansas City Chiefs,78.85053629083046,16
 47,59,Greene,Tennessee,"36 10m 31.2645s N, 82 50m 44.976s W",70220,47,059,47059,Carolia Panthers,129.79388648944905,5
 38,67,Pembina,North Dakota,"48 46m 3.0556s N, 97 33m 6.54856s W",6827,38,067,38067,Minnesota Vikings,331.65040810453723,20
-6,65,Riverside,California,"33 44m 37.2482s N, 115 59m 37.8452s W",2422764,06,065,06065,Los Angeles Chargers,130.71418494203093,17
+6,65,Riverside,California,"33 44m 37.2482s N, 115 59m 37.8452s W",2422764,06,065,06065,Los Angeles Rams,135.63460713941546,18
 19,169,Story,Iowa,"42 2m 10.4694s N, 93 27m 54.1612s W",98615,19,169,19169,Minnesota Vikings,203.04601787906637,20
 17,157,Randolph,Illinois,"38 3m 7.49702s N, 89 49m 30.635s W",30055,17,157,17157,Tennessee Titans,212.94739238661913,31
 13,11,Banks,Georgia,"34 21m 14.8932s N, 83 29m 50.5686s W",18069,13,011,13011,Atlanta Falcons,66.26520376690098,2
@@ -2508,7 +2508,7 @@ state_id,county_id,county_name,state_name,geo_center,pop_2020,State FIPS Code,Co
 46,91,Marshall,South Dakota,"45 45m 31.2148s N, 97 35m 54.6016s W",4300,46,091,46091,Minnesota Vikings,218.13286294712938,20
 8,71,Las Animas,Colorado,"37 18m 57.0186s N, 104 2m 19.3194s W",14564,08,071,08071,Denver Broncos,175.71130643787106,10
 54,59,Mingo,West Virginia,"37 43m 35.0545s N, 82 8m 5.14038s W",23455,54,059,54059,Cincinnati Bengals,160.04671819279187,7
-6,79,San Luis Obispo,California,"35 23m 14.7065s N, 120 27m 7.909s W",282231,06,079,06079,Los Angeles Rams,155.3693327366003,18
+6,79,San Luis Obispo,California,"35 23m 14.7065s N, 120 27m 7.909s W",282231,06,079,06079,Los Angeles Rams,155.72669833801186,18
 27,19,Carver,Minnesota,"44 49m 14.7339s N, 93 48m 9.30956s W",107286,27,019,27019,Minnesota Vikings,28.756357571588442,20
 34,21,Mercer,New Jersey,"40 17m 0.374727s N, 74 42m 6.30866s W",386759,34,021,34021,Philadelphia Eagles,36.1376498226593,26
 12,15,Charlotte,Florida,"26 53m 59.4358s N, 81 57m 1.13748s W",187960,12,015,12015,Tampa Bay Buccaneers,81.50451650094182,30

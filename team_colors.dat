@@ -1,6 +1,6 @@
 team_id	team	hex
 1	Arizona Cardinals	#97233F
-2	Atlanta Falcons	#A71930
+2	Atlanta Falcons	#000000
 3	Baltimore Ravens	#241773
 4	Buffalo Bills	#C60C30
 5	Carolia Panthers	#0085CA
@@ -11,7 +11,7 @@ team_id	team	hex
 10	Denver Broncos	#FB4F14
 11	Detroit Lions	#0076B6
 12	Green Bay Packers	#203731
-13	Houston Texans	#A71930
+13	Houston Texans	#03202F
 14	Indianapolis Colts	#002C5F
 15	Jacksonville Jaguars	#D7A22A
 16	Kansas City Chiefs	#E31837
@@ -26,7 +26,7 @@ team_id	team	hex
 25	Las Vegas Raiders	#000000
 26	Philadelphia Eagles	#004C54
 27	Pittsburgh Steelers	#FFB612
-28	San Francisco 49ers	#B3995D
+28	San Francisco 49ers	#AA0000
 29	Seattle Seahawks	#69BE28
 30	Tampa Bay Buccaneers	#D50A0A
 31	Tennessee Titans	#4B92DB

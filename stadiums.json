@@ -437,6 +437,24 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -122.200556,
+          37.751667
+        ]
+      },
+      "properties": {
+        "League": "NFL",
+        "Team": "Oakland Raiders",
+        "Lat": 37.751667,
+        "Long": -122.200556,
+        "Stadium": "Oakland Alameda County Coliseum",
+        "Conference": "AFC"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -115.1833222,
           36.0908665
         ]
@@ -508,27 +526,9 @@
     {
       "type": "Feature",
       "properties": {
-        "League": "NFL",
-        "Team": "Los Angeles Chargers",
-        "Lat": 33.8644,
-        "Long": -118.2611,
-        "Stadium": "StubHub Center",
-        "Conference": "AFC"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -118.26112747192383,
-          33.86435779106245
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "Stadium": "Los Angeles Memorial Coliseum",
-        "Long": "-118.2880",
-        "Lat": "34.0140",
+        "Stadium": "SoFi Stadium",
+        "Long": "-118.3390396",
+        "Lat": "33.9534651",
         "Team": "Los Angeles Rams",
         "League": "NFL",
         "Conference": "NFC"
@@ -536,8 +536,26 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -118.28801393508911,
-          34.01404531318551
+          -118.3390396,
+          33.9534651
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "League": "NFL",
+        "Team": "Los Angeles Chargers",
+        "Stadium": "SoFi Stadium",
+        "Long": "-118.3390396",
+        "Lat": "33.9534651",
+        "Conference": "AFC"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.3390396,
+          33.9534651
         ]
       }
     },
