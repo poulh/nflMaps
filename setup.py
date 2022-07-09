@@ -9,5 +9,5 @@ setup(
     author='Poul Hornsleth',
     author_email='phornsleth@asquared.com',
     description='Maps of NFL Teams and Fan Base',
-    install_requires = ['pandas','geopandas','requests','matplotlib','geopy']
+    install_requires = ['pandas','geopandas','requests','matplotlib','geopy','plotly','plotly-geo','pyshp','shapely']
 )
