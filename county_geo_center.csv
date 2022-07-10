@@ -1,4 +1,4 @@
-state_id,county_id,county_name,state_name,geo_center
+state_code,county_code,county_name,state_name,geo_center
 39,63,Hancock,Ohio,"41 0m 6.97815s N, 83 39m 59.5275s W"
 51,179,Stafford,Virginia,"38 25m 14.5885s N, 77 27m 26.6414s W"
 31,181,Webster,Nebraska,"40 10m 35.1596s N, 98 29m 59.8106s W"

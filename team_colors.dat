@@ -1,9 +1,9 @@
-team_id	team	hex
+team_id	team_name	team_color_hex
 1	Arizona Cardinals	#97233F
 2	Atlanta Falcons	#000000
 3	Baltimore Ravens	#241773
 4	Buffalo Bills	#C60C30
-5	Carolia Panthers	#0085CA
+5	Carolina Panthers	#0085CA
 6	Chicago Bears	#0B162A
 7	Cincinnati Bengals	#FB4F14
 8	Cleveland Browns	#311D00

@@ -5,38 +5,40 @@ import geopy
 import geopy.distance
 import plotly.figure_factory as ff
 import numpy as np
-import pandas as pd
+import logging
+
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
 def load_population_data(filename):
-    df = pd.read_csv(filename, index_col=False)
-    df['CTYNAME'] = df['CTYNAME'].str.split(expand=True)[0]
+    df_population = pd.read_csv(filename, index_col=False)
+    df_population['CTYNAME'] = df_population['CTYNAME'].str.split(expand=True)[0]
 
     column_mappings = {
-        'COUNTY': 'county_id',
-        'STATE': 'state_id',
+        'COUNTY': 'county_code',
+        'STATE': 'state_code',
         #    'CTYNAME': 'county_name',
         #   'STNAME': 'state_name',
         'POPESTIMATE2020': 'pop_2020',
     }
-    df.rename(columns=column_mappings, inplace=True)
-    population_df = df[df['county_id'] != 0][list(column_mappings.values())]
+    df_population = df_population.rename(columns=column_mappings)
+    df_population = df_population[df_population['county_code'] != 0][list(column_mappings.values())]
 
-    population_df['State FIPS Code'] = population_df['state_id'].apply(lambda x: str(x).zfill(2))
-    population_df['County FIPS Code'] = population_df['county_id'].apply(lambda x: str(x).zfill(3))
-    population_df['FIPS'] = population_df['State FIPS Code'] + population_df['County FIPS Code']
-    population_df.set_index(['state_id', 'county_id'], inplace=True)
+    df_population['State FIPS Code'] = df_population['state_code'].apply(lambda x: str(x).zfill(2))
+    df_population['County FIPS Code'] = df_population['county_code'].apply(lambda x: str(x).zfill(3))
+    df_population['FIPS'] = df_population['State FIPS Code'] + df_population['County FIPS Code']
+    df_population = df_population.set_index(['state_code', 'county_code'])
 
-    return population_df
+    return df_population
 
 
 def load_stadium_data(filename):
     team_data = {
-        'team': [],
-        'conference': [],
-        'location': []
+        'team_name': [],
+        'team_conferences': [],
+        'stadium_location': [],
+        'stadium_name': []
     }
 
     with open(filename) as file:
@@ -44,16 +46,17 @@ def load_stadium_data(filename):
         for team in json_data['features']:
             team_prop = team['properties']
             team_geo = team['geometry']['coordinates']
-            team_data['team'].append(team_prop['Team'])
-            team_data['conference'].append(team_prop['Conference'])
-            team_data['location'].append(geopy.Point(latitude=team_geo[1], longitude=team_geo[0]))
+            team_data['team_name'].append(team_prop['Team'])
+            team_data['team_conferences'].append(team_prop['Conference'])
+            team_data['stadium_location'].append(geopy.Point(latitude=team_geo[1], longitude=team_geo[0]))
+            team_data['stadium_name'].append(team_prop['Stadium'])
 
-    df = pd.DataFrame(team_data)
-    df.set_index('team', inplace=True)
-    return df
+    df_stadium = pd.DataFrame(team_data)
+    df_stadium = df_stadium.set_index('team_name')
+    return df_stadium
 
 
-def cache_county_geo_center_data():
+def create_county_geo_center_cache():
     # this file is very large due to county boundary data.
     # however, the geo center of each county is in it too which is what we want
     filename = 'us-county-boundaries.csv'
@@ -64,8 +67,8 @@ def cache_county_geo_center_data():
     column_mappings = {
         'NAME': 'county_name',
         'STATE_NAME': 'state_name',
-        'STATEFP': 'state_id',
-        'COUNTYFP': 'county_id',
+        'STATEFP': 'state_code',
+        'COUNTYFP': 'county_code',
         'location': 'geo_center',
     }
 
@@ -75,72 +78,71 @@ def cache_county_geo_center_data():
 
     # drop all columns except the ones we need
     df = df[list(column_mappings.values())]
-    df.set_index(['state_id', 'county_id'], inplace=True)
+    df.set_index(['state_code', 'county_code'], inplace=True)
     df.to_csv('county_geo_center.csv')
 
 
-def load_team_colors(filename):
-    df = pd.read_csv(filename, delimiter="\t")
-    df.set_index(['team'],inplace=True)
+def create_team_data_cache():
+    logging.info("loading team stadium locations")
+    df_stadium = load_stadium_data('stadiums.json')
+    logging.info("loading team colors")
+    # colors from here: https://teamcolorcodes.com/nfl-team-color-codes/
+    # replace some teams' primary color with secondary to make map look good
+    df_team_color = pd.read_csv('team_colors.dat', delimiter="\t", index_col=['team_name'])
+    logging.info("creating team dataframe")
+    df_stadium = pd.merge(df_stadium, df_team_color, how='outer', left_index=True, right_index=True)
+    df_stadium = df_stadium.reset_index()
+    df_stadium['team_id'] = df_stadium['team_id'].fillna(-1)
 
-    return df
-
+    df_stadium = df_stadium.astype({'team_id': int})
+    df_stadium = df_stadium.set_index('team_id')
+    df_stadium.to_csv('team_data.csv')
 
 
 def create_closest_team_cache():
-
-    print("loading county population data")
+    logging.info("loading county population data")
     population_df = load_population_data('county_population.csv')
-    print("loading county geo centers")
-    county_df = pd.read_csv('county_geo_center.csv', index_col=['state_id', 'county_id'])
-    print("creating county dataframe")
+    logging.info("loading county geo centers")
+    county_df = pd.read_csv('county_geo_center.csv', index_col=['state_code', 'county_code'])
+    logging.info("creating county dataframe")
     county_df = pd.merge(county_df, population_df, how='inner', left_index=True, right_index=True)
-    print("loading team stadium locations")
-    team_df = load_stadium_data('stadiums.json')
-    print("loading team colors")
-    # colors from here: https://teamcolorcodes.com/nfl-team-color-codes/
-    # replace some teams' primary color with secondary to make map look good
-    team_color_df = load_team_colors('team_colors.dat')
-    print("creating team dataframe")
-    team_df = pd.merge(team_df, team_color_df, how='inner', left_index=True, right_index=True)
+    team_df = pd.read_csv('team_data.csv', index_col=['team_name'])
+    team_df = team_df[team_df['team_id'] != -1]
 
-
-
-    def find_closest_team(county_row):
+    def calculate_closest_team(county_row):
         county_distances_to_each_team = team_df.apply(
-            lambda team_row: geopy.distance.distance(county_row['geo_center'], team_row['location']).miles, axis=1)
+            lambda team_row: geopy.distance.distance(county_row['geo_center'], team_row['stadium_location']).miles,
+            axis=1)
 
         closest_team = county_distances_to_each_team.idxmin()
-
         closest_team_distance = county_distances_to_each_team.loc[closest_team]
-
         closest_team_id = team_df.loc[closest_team].get('team_id')
         s = pd.Series([closest_team, closest_team_distance, closest_team_id])
 
         return s
 
-    print("calculating closest stadium for each county")
-    county_df[['closest_team', 'closest_team_distance','closest_team_id']] = county_df.apply(find_closest_team, axis=1)
+    logging.info("calculating closest stadium for each county")
+    county_df[['closest_team', 'closest_team_distance', 'closest_team_id']] = county_df.apply(calculate_closest_team,
+                                                                                              axis=1)
 
-    print("saving data to file")
+    logging.info("saving data to file")
     county_df.to_csv('closest_team_to_each_county.csv')
 
 
 def show_nfl_map():
     df_sample = pd.read_csv('closest_team_to_each_county.csv')
-    df_colors = pd.read_csv('team_colors.dat',delimiter="\t")
+    df_colors = pd.read_csv('team_colors.dat', delimiter="\t")
 
-    colorscale = df_colors['hex'].tolist()
+    colorscale = df_colors['team_color_hex'].tolist()
     # you have to have one extra color scale for it to work
     # have not dug into why this is yet
     colorscale.append("#ffffff")
 
     # makes a list from 1 to 32
-    endpts = list(np.linspace(1, 32, len(colorscale) -1 ))
+    endpts = list(np.linspace(1, 32, len(colorscale) - 1))
 
     fips = df_sample['FIPS'].tolist()
     values = df_sample['closest_team_id'].tolist()
-
 
     fig = ff.create_choropleth(
         fips=fips, values=values,
@@ -156,11 +158,10 @@ def show_nfl_map():
     fig.show()
 
 
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    logging.basicConfig()
+
+    create_team_data_cache()
     create_closest_team_cache()
 
     show_nfl_map()
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

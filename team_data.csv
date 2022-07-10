@@ -1,0 +1,34 @@
+team_id,team_name,team_conferences,stadium_location,stadium_name,team_color_hex
+1,Arizona Cardinals,NFC,"33 31m 39s N, 112 15m 45s W",University of Phoenix Stadium,#97233F
+2,Atlanta Falcons,NFC,"33 45m 18.6238s N, 84 24m 3.31512s W",Mercedes-Benz Stadium,#000000
+3,Baltimore Ravens,AFC,"39 16m 41.2023s N, 76 37m 21.8255s W",M&T Bank Stadium,#241773
+4,Buffalo Bills,AFC,"42 46m 24.9996s N, 78 47m 12.9984s W",Ralph Wilson Stadium,#C60C30
+5,Carolina Panthers,NFC,"35 13m 32.9988s N, 80 51m 10.0008s W",Bank of America Stadium,#0085CA
+6,Chicago Bears,NFC,"41 51m 44.3017s N, 87 37m 0.261383s W",Soldier Field,#0B162A
+7,Cincinnati Bengals,AFC,"39 5m 43.5984s N, 84 30m 57.7404s W",Paul Brown Stadium,#FB4F14
+8,Cleveland Browns,AFC,"41 30m 21.9996s N, 81 41m 57.9984s W",FirstEnergy Stadium,#311D00
+9,Dallas Cowboys,NFC,"32 44m 52.0008s N, 97 5m 34.0008s W",AT&T Stadium,#869397
+10,Denver Broncos,AFC,"39 44m 38.0004s N, 105 1m 12s W",Sports Authority Field at Mile High,#FB4F14
+11,Detroit Lions,NFC,"42 20m 24s N, 83 2m 44.0016s W",Ford Field,#0076B6
+12,Green Bay Packers,NFC,"44 30m 5.0004s N, 88 3m 43.9992s W",Lambeau Field,#203731
+13,Houston Texans,AFC,"29 41m 5.58141s N, 95 24m 39.3777s W",NRG Stadium,#03202F
+14,Indianapolis Colts,AFC,"39 45m 36.2016s N, 86 9m 49.7016s W",Lucas Oil Stadium,#002C5F
+15,Jacksonville Jaguars,AFC,"30 19m 26.0004s N, 81 38m 15s W",EverBank Field,#D7A22A
+16,Kansas City Chiefs,AFC,"39 2m 56.0004s N, 94 29m 2.0004s W",Arrowhead Stadium,#E31837
+25,Las Vegas Raiders,AFC,"36 5m 27.1194s N, 115 10m 59.9599s W",Allegiant Stadium,#000000
+17,Los Angeles Chargers,AFC,"33 57m 12.4744s N, 118 20m 20.5426s W",SoFi Stadium,#0080C6
+18,Los Angeles Rams,NFC,"33 57m 12.4744s N, 118 20m 20.5426s W",SoFi Stadium,#FFA300
+19,Miami Dolphins,AFC,"25 57m 29.0016s N, 80 14m 20.0004s W",Hard Rock Stadium,#008E97
+20,Minnesota Vikings,NFC,"44 58m 24.6973s N, 93 15m 27.1156s W",U.S. Bank Stadium,#4F2683
+21,New England Patriots,AFC,"42 5m 27.3984s N, 71 15m 48.384s W",Gillette Stadium,#B0B7BC
+22,New Orleans Saints,NFC,"29 57m 2.9988s N, 90 4m 51.9996s W",Mercedes-Benz Superdome,#D3BC8D
+23,New York Giants,NFC,"40 48m 48.9996s N, 74 4m 27.9984s W",MetLife Stadium,#0B2265
+24,New York Jets,AFC,"40 48m 48.9996s N, 74 4m 27.9984s W",MetLife Stadium,#125740
+-1,Oakland Raiders,AFC,"37 45m 6.0012s N, 122 12m 2.0016s W",Oakland Alameda County Coliseum,
+26,Philadelphia Eagles,NFC,"39 54m 2.9988s N, 75 10m 3s W",Lincoln Financial Field,#004C54
+27,Pittsburgh Steelers,AFC,"40 26m 48.0012s N, 80 0m 56.9988s W",Heinz Field,#FFB612
+28,San Francisco 49ers,NFC,"37 24m 10.8s N, 121 58m 12s W",Levis Stadium,#AA0000
+29,Seattle Seahawks,NFC,"47 35m 43.0008s N, 122 19m 54.0012s W",CenturyLink Field,#69BE28
+30,Tampa Bay Buccaneers,NFC,"27 58m 32.9988s N, 82 30m 11.9988s W",Raymond James Stadium,#D50A0A
+31,Tennessee Titans,AFC,"36 9m 59.0004s N, 86 46m 17.0004s W",Nissan Stadium,#4B92DB
+32,Washington Redskins,NFC,"38 54m 28.0008s N, 76 51m 51.9984s W",FedEx Field,#5A1414
