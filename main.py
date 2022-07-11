@@ -22,9 +22,6 @@ def load_population_data(filename):
     df_population = df_population.rename(columns=column_mappings)
     df_population = df_population[df_population['county_code'] != 0][list(column_mappings.values())]
 
-    df_population['State FIPS Code'] = df_population['state_code'].apply(lambda x: str(x).zfill(2))
-    df_population['County FIPS Code'] = df_population['county_code'].apply(lambda x: str(x).zfill(3))
-    df_population['FIPS'] = df_population['State FIPS Code'] + df_population['County FIPS Code']
     df_population = df_population.set_index(['state_code', 'county_code'])
 
     return df_population
@@ -149,7 +146,13 @@ def create_closest_team_cache():
 
 
 def show_nfl_map():
-    df_sample = pd.read_csv('closest_team_to_each_county.csv')
+    df_counties = pd.read_csv('closest_team_to_each_county.csv')
+    df_counties = df_counties.reset_index()
+    df_counties['state_fips'] = df_counties['state_code'].apply(lambda x: str(x).zfill(2))
+    df_counties['county_fips'] = df_counties['county_code'].apply(lambda x: str(x).zfill(3))
+    df_counties['FIPS'] = df_counties['state_fips'] + df_counties['county_fips']
+    df_counties.loc[df_counties['closest_team_distance'] > 250, 'closest_team_id'] = 32
+
     df_teams = pd.read_csv('team_data.csv')
 
     colorscale = df_teams['team_color_hex'].tolist()
@@ -160,8 +163,8 @@ def show_nfl_map():
     # makes a list from 0 to 31; team IDs are zero based
     endpts = list(np.linspace(0, 31, len(colorscale) - 1))
 
-    fips = df_sample['FIPS'].tolist()
-    values = df_sample['closest_team_id'].tolist()
+    fips = df_counties['FIPS'].tolist()
+    values = df_counties['closest_team_id'].tolist()
 
     fig = ff.create_choropleth(
         fips=fips, values=values,
@@ -178,7 +181,6 @@ def show_nfl_map():
 
 
 if __name__ == '__main__':
-    # exit()
     logging.basicConfig(level=logging.INFO)
 
     # create_team_data_cache()
