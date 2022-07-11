@@ -51,9 +51,13 @@ def load_stadium_data(filename):
 
 
 def calculate_min_distance(ds_from, str_from_col, df_to_each, str_to_col):
-    ds_distances_to_each = df_to_each.apply(
-        lambda ds_to: geopy.distance.distance(ds_from[str_from_col], ds_to[str_to_col]).miles,
-        axis=1)
+    def calc_distance(ds_to):
+        if ds_from['state_code'] == ds_to['closest_state_code']:
+            return geopy.distance.distance(ds_from[str_from_col], ds_to[str_to_col]).miles / 2.5
+
+        return geopy.distance.distance(ds_from[str_from_col], ds_to[str_to_col]).miles
+
+    ds_distances_to_each = df_to_each.apply(calc_distance, axis=1)
 
     closest_index = ds_distances_to_each.idxmin()
     closest_distance = ds_distances_to_each.loc[closest_index]
@@ -132,6 +136,7 @@ def create_closest_team_cache():
     county_df = pd.read_csv('county_geo_center.csv', index_col=['state_code', 'county_code'])
     logging.info("creating county dataframe")
     county_df = pd.merge(county_df, population_df, how='inner', left_index=True, right_index=True)
+    county_df = county_df.reset_index()
     team_df = pd.read_csv('team_data.csv')
 
     def calculate_closest_team(ds_from):
@@ -151,7 +156,8 @@ def show_nfl_map():
     df_counties['state_fips'] = df_counties['state_code'].apply(lambda x: str(x).zfill(2))
     df_counties['county_fips'] = df_counties['county_code'].apply(lambda x: str(x).zfill(3))
     df_counties['FIPS'] = df_counties['state_fips'] + df_counties['county_fips']
-    df_counties.loc[df_counties['closest_team_distance'] > 250, 'closest_team_id'] = 32
+    # uncomment this to only color counties within X miles of the stadium
+    df_counties.loc[df_counties['closest_team_distance'] > 125, 'closest_team_id'] = 32
 
     df_teams = pd.read_csv('team_data.csv')
 
@@ -184,6 +190,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
 
     # create_team_data_cache()
-    # create_closest_team_cache()
+    create_closest_team_cache()
 
     show_nfl_map()
