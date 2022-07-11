@@ -8,9 +8,6 @@ import numpy as np
 import logging
 
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
 def load_population_data(filename):
     df_population = pd.read_csv(filename, index_col=False)
     df_population['CTYNAME'] = df_population['CTYNAME'].str.split(expand=True)[0]
@@ -56,6 +53,27 @@ def load_stadium_data(filename):
     return df_stadium
 
 
+def calculate_min_distance(ds_from, str_from_col, df_to_each, str_to_col):
+    ds_distances_to_each = df_to_each.apply(
+        lambda ds_to: geopy.distance.distance(ds_from[str_from_col], ds_to[str_to_col]).miles,
+        axis=1)
+
+    closest_index = ds_distances_to_each.idxmin()
+    closest_distance = ds_distances_to_each.loc[closest_index]
+
+    try:
+        # if closest_index is a double or tuple index this code handles that.
+        # splitting and putting one value in each column
+        rval = list(closest_index)
+    except TypeError as te:
+        rval = [closest_index]
+    rval.append(closest_distance)
+
+    s = pd.Series(rval)
+
+    return s
+
+
 def create_county_geo_center_cache():
     # this file is very large due to county boundary data.
     # however, the geo center of each county is in it too which is what we want
@@ -73,7 +91,6 @@ def create_county_geo_center_cache():
     }
 
     df['location'] = df.apply(lambda row: geopy.Point(*row['Geo Point'].split(',')), axis=1)
-    # df['location'] = df.apply(lambda row: foo(row))
     df.rename(columns=column_mappings, inplace=True)
 
     # drop all columns except the ones we need
@@ -85,18 +102,30 @@ def create_county_geo_center_cache():
 def create_team_data_cache():
     logging.info("loading team stadium locations")
     df_stadium = load_stadium_data('stadiums.json')
-    logging.info("loading team colors")
-    # colors from here: https://teamcolorcodes.com/nfl-team-color-codes/
-    # replace some teams' primary color with secondary to make map look good
-    df_team_color = pd.read_csv('team_colors.dat', delimiter="\t", index_col=['team_name'])
-    logging.info("creating team dataframe")
-    df_stadium = pd.merge(df_stadium, df_team_color, how='outer', left_index=True, right_index=True)
-    df_stadium = df_stadium.reset_index()
-    df_stadium['team_id'] = df_stadium['team_id'].fillna(-1)
 
-    df_stadium = df_stadium.astype({'team_id': int})
-    df_stadium = df_stadium.set_index('team_id')
-    df_stadium.to_csv('team_data.csv')
+    # colors from here: https://teamcolorcodes.com/nfl-team-color-codes/
+    # replaced some teams' primary color with secondary to make map look good
+    logging.info("loading team colors")
+    df_team_color = pd.read_csv('team_colors.dat', delimiter="\t", index_col=['team_name'])
+
+    logging.info("creating team dataframe")
+    df_stadium = pd.merge(df_stadium, df_team_color, how='inner', left_index=True, right_index=True)
+    df_stadium = df_stadium.reset_index()
+
+    logging.info("loading county geo centers")
+    df_county = pd.read_csv('county_geo_center.csv', index_col=['state_code', 'county_code'])
+
+    def calc_closest_county_to_each_stadium(ds_from):
+        return calculate_min_distance(ds_from, 'stadium_location',
+                                      df_county, 'geo_center')
+
+    logging.info("calculating which county each stadium is in")
+    columns_to_add = ['closest_state_code', 'closest_county_code', 'closest_county_distance']
+    df_stadium[columns_to_add] = df_stadium.apply(calc_closest_county_to_each_stadium, axis=1)
+
+    df_stadium = df_stadium.sort_values(by=['team_name'])
+    logging.info("writing to file")
+    df_stadium.to_csv('team_data.csv', index=False)
 
 
 def create_closest_team_cache():
@@ -106,40 +135,30 @@ def create_closest_team_cache():
     county_df = pd.read_csv('county_geo_center.csv', index_col=['state_code', 'county_code'])
     logging.info("creating county dataframe")
     county_df = pd.merge(county_df, population_df, how='inner', left_index=True, right_index=True)
-    team_df = pd.read_csv('team_data.csv', index_col=['team_name'])
-    team_df = team_df[team_df['team_id'] != -1]
+    team_df = pd.read_csv('team_data.csv')
 
-    def calculate_closest_team(county_row):
-        county_distances_to_each_team = team_df.apply(
-            lambda team_row: geopy.distance.distance(county_row['geo_center'], team_row['stadium_location']).miles,
-            axis=1)
-
-        closest_team = county_distances_to_each_team.idxmin()
-        closest_team_distance = county_distances_to_each_team.loc[closest_team]
-        closest_team_id = team_df.loc[closest_team].get('team_id')
-        s = pd.Series([closest_team, closest_team_distance, closest_team_id])
-
-        return s
+    def calculate_closest_team(ds_from):
+        return calculate_min_distance(ds_from, 'geo_center',
+                                      team_df, 'stadium_location')
 
     logging.info("calculating closest stadium for each county")
-    county_df[['closest_team', 'closest_team_distance', 'closest_team_id']] = county_df.apply(calculate_closest_team,
-                                                                                              axis=1)
-
+    county_df[['closest_team_id', 'closest_team_distance']] = county_df.apply(calculate_closest_team,
+                                                                              axis=1)
     logging.info("saving data to file")
     county_df.to_csv('closest_team_to_each_county.csv')
 
 
 def show_nfl_map():
     df_sample = pd.read_csv('closest_team_to_each_county.csv')
-    df_colors = pd.read_csv('team_colors.dat', delimiter="\t")
+    df_teams = pd.read_csv('team_data.csv')
 
-    colorscale = df_colors['team_color_hex'].tolist()
+    colorscale = df_teams['team_color_hex'].tolist()
     # you have to have one extra color scale for it to work
     # have not dug into why this is yet
     colorscale.append("#ffffff")
 
-    # makes a list from 1 to 32
-    endpts = list(np.linspace(1, 32, len(colorscale) - 1))
+    # makes a list from 0 to 31; team IDs are zero based
+    endpts = list(np.linspace(0, 31, len(colorscale) - 1))
 
     fips = df_sample['FIPS'].tolist()
     values = df_sample['closest_team_id'].tolist()
@@ -159,9 +178,10 @@ def show_nfl_map():
 
 
 if __name__ == '__main__':
-    logging.basicConfig()
+    # exit()
+    logging.basicConfig(level=logging.INFO)
 
-    create_team_data_cache()
-    create_closest_team_cache()
+    # create_team_data_cache()
+    # create_closest_team_cache()
 
     show_nfl_map()
